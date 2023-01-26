@@ -11,11 +11,26 @@ class KeyValuePair {
 class HashTable {
 
   constructor(numBuckets = 4) {
-    // Your code here
+    this.count = 0
+    this.capacity = numBuckets
+    this.data = new Array(numBuckets)
+    for (let i = 0; i < numBuckets; i++){
+      this.data[i] = null
+    }
   }
 
   hash(key) {
-    // Your code here
+
+    let res = [];
+    let sha = sha256(key)
+    for (let i = 0; i < sha.length; i++){
+      let ele = sha[i]
+      let count = 0;
+      if (!count === 8){
+        res.push(ele)
+        count++
+      } else {return res.join('')}
+    }
   }
 
   hashMod(key) {
