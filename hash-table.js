@@ -39,7 +39,7 @@ class HashTable {
     let hashModKey = this.hashMod(key)
     let newNode = new KeyValuePair(key, value)
   if(this.data[hashModKey] === null) {
-    this.data[hashModKey] = new KeyValuePair(key, value);
+    this.data[hashModKey] = newNode
     this.count++;
     } else {
      newNode.next = this.data[hashModKey]
@@ -48,7 +48,28 @@ class HashTable {
     }
   }
   insert(key, value) {
-    // Your code here
+    
+    let hashModKey = this.hashMod(key)
+    let newNode = new KeyValuePair(key, value)
+    let currentNode = this.data[hashModKey]
+   if(this.data[hashModKey] === null){
+    this.data[hashModKey] = newNode
+    this.count++;
+   } else {
+     while(currentNode){
+      if(currentNode.key === key){
+        currentNode.value = value
+        return currentNode
+      }
+      currentNode = currentNode.next
+     } 
+     newNode.next = this.data[hashModKey]
+     this.data[hashModKey] = newNode
+     this.count++
+   }
+    
+   
+    
   }
 
 }
