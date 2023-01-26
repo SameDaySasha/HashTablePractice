@@ -11,30 +11,18 @@ class KeyValuePair {
 class HashTable {
 
   constructor(numBuckets = 4) {
-    this.count = 0
-    this.capacity = numBuckets
-    this.data = new Array(numBuckets)
-    for (let i = 0; i < numBuckets; i++){
-      this.data[i] = null
-    }
+    this.count = 0;
+    this.capacity = numBuckets;
+    this.data = new Array(this.capacity).fill(null);
   }
 
   hash(key) {
-
-    let res = [];
-    let sha = sha256(key)
-    for (let i = 0; i < sha.length; i++){
-      let ele = sha[i]
-      let count = 0;
-      if (!count === 8){
-        res.push(ele)
-        count++
-      } else {return res.join('')}
-    }
+    let hash = sha256(key);
+    return parseInt(hash.slice(0, 8), 16);
   }
 
   hashMod(key) {
-    // Your code here
+    return this.hash(key) % this.capacity;
   }
 
   insertNoCollisions(key, value) {
